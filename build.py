@@ -109,10 +109,12 @@ pages['index.html']=('MJN Realty | Adirondack Property, New York','MJN Realty, A
     <section class="section alt">
       <div class="wrap">
         <h2>What we do</h2>
-        <div class="grid">
-          <div class="card steel"><span class="num">01</span><h3>Seasonal rentals and vacation home purchases</h3><p>Seasonal rentals, as well as vacation home purchases, in the Adirondack region.</p></div>
-          <div class="card wood"><span class="num">02</span><h3>Seasonal stays</h3><p>The Hayes House in Schroon Lake is offered as a seasonal rental to select guests, arranged directly.</p></div>
-          <div class="card"><span class="num">03</span><h3>More to come</h3><p><span class="ph">Any other services MJN Realty offers, for Matthew to confirm</span></p></div>
+        <div class="grid five">
+          <div class="card steel"><span class="num">01</span><h3>Seasonal and vacation rentals</h3><p>Weekly and full-season rentals across the Adirondacks. We handle the details, from marketing and reservations to guest communication and cleaning, so owners can stay hands-off.</p></div>
+          <div class="card wood"><span class="num">02</span><h3>Vacation home purchases</h3><p>Help finding the right second home or getaway. We look past the price at location, upkeep, rental potential, and long-term fit.</p></div>
+          <div class="card"><span class="num">03</span><h3>Property management</h3><p>Care for homes while owners are away, including regular home watch visits, seasonal opening and closing, and checks after storms.</p></div>
+          <div class="card steel"><span class="num">04</span><h3>Free rental income evaluation</h3><p>A free, no-obligation estimate of what a home could earn as a seasonal rental, for owners and for buyers.</p></div>
+          <div class="card wood"><span class="num">05</span><h3>List and sell your home</h3><p>Thinking of selling? We present your Adirondack home to the right buyers, with a market analysis to start.</p></div>
         </div>
       </div>
     </section>

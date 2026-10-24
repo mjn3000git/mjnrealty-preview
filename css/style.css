@@ -231,3 +231,9 @@ fieldset[disabled] { border: 0; padding: 0; margin: 0; display: grid; gap: 1.1re
 .hero.mjn h1 { font-size: clamp(2.1rem, 4.4vw, 2.9rem); }
 @media (max-width: 860px) { .hero.mjn { background-image: linear-gradient(to bottom, rgba(47,61,76,.45) 0%, rgba(47,61,76,.75) 60%, rgba(47,61,76,.9) 100%), url("../images/bg-leaves-soft-800.jpg"); } .hero.mjn .hero-panel { max-width: none; padding: 1.2rem 1.2rem 1.3rem; } }
 @media (max-width: 600px) { .region-strip { display: grid; grid-template-columns: 1fr 1fr; text-align: center; gap: .5rem; } .region-strip li + li::before { display: none; } }
+/* Five-card services grid: 3 + 2 centered on desktop */
+@media (min-width: 900px) {
+  .grid.five { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid.five > .card { grid-column: span 2; }
+  .grid.five > .card:nth-child(4) { grid-column: 2 / span 2; }
+}
