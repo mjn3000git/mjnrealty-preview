@@ -89,7 +89,7 @@ pages['index.html']=('MJN Realty | Adirondack Property, New York','MJN Realty, A
         <p class="eyebrow">Adirondacks &middot; New York</p>
         <h1>MJN Realty</h1>
         <p class="tagline">Adirondack property, kept with care.</p>
-        <p>Adirondack property in the Lake George and Schroon Lake region of New York, founded by Matthew Nothdurft.</p>
+        <p>Adirondack property in the Lake George and Schroon Lake region of New York, founded by Matthew Nothdurft, licensed real estate broker.</p>
         <div class="btn-row">
           <a class="btn" href="properties.html">View properties</a>
           <a class="btn secondary" href="contact.html">Contact</a>
