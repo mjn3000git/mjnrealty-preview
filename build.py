@@ -174,9 +174,9 @@ pages['about.html']=('About | MJN Realty','About MJN Realty and its founder, Mat
           <h2>Matthew Nothdurft</h2>
           <p class="eyebrow">Founder &amp; CEO</p>
           <p>Matthew Nothdurft is the founder and CEO of MJN Realty.</p>
-          <p><span class="ph">Short bio in Matthew&rsquo;s words: background, connection to the Adirondacks, and what he wants guests and partners to know</span></p>
+          <p>Matthew was born and raised in the Adirondacks, in Schroon Lake, New York, where he went to school from kindergarten through twelfth grade. After college in nearby Queensbury, he moved away for work, but the lake kept calling him home, and he has since moved back. These days you will most often find him on Schroon Lake, swimming or out on the boat, and he brings that same love for the region to MJN Realty.</p>
         </div>
-        <div class="portrait-ph" role="note"><div><strong>PLACEHOLDER</strong>Photo of Matthew, or a region photo of his choosing</div></div>
+        <figure class="portrait-photo"><img src="images/matthew-nothdurft.jpg" alt="Matthew Nothdurft" width="671" height="894" loading="lazy"></figure>
       </div>
     </section>
 

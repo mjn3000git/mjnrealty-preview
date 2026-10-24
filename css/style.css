@@ -237,3 +237,6 @@ fieldset[disabled] { border: 0; padding: 0; margin: 0; display: grid; gap: 1.1re
   .grid.five > .card { grid-column: span 2; }
   .grid.five > .card:nth-child(4) { grid-column: 2 / span 2; }
 }
+.portrait-photo { margin: 0; max-width: 26rem; justify-self: end; padding: 8px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.portrait-photo img { display: block; width: 100%; height: auto; aspect-ratio: 671/894; object-fit: cover; object-position: top; border-radius: 2px; }
+@media (max-width: 760px) { .portrait-photo { max-width: 300px; justify-self: center; width: 100%; } }
