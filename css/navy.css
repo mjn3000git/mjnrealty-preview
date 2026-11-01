@@ -130,3 +130,15 @@ footer .copy{margin-top:10px;color:rgba(246,244,238,.6);font-size:13px}
 .areas{background:#fff}
 .areas .area{background:var(--cream)}
 @media (max-width:860px){.properties{padding-top:72px}.photo-credit{left:20px;right:20px}}
+.subhead{background:var(--navy);color:#fff;position:relative}
+.license{padding-top:80px}
+.lic-wrap{max-width:960px}
+.lic-intro{margin-top:16px;font-size:18px;color:var(--muted)}
+.lic-table{width:100%;margin-top:36px;border-collapse:collapse;background:#fff;box-shadow:0 20px 50px rgba(20,36,64,.10)}
+.lic-table th,.lic-table td{text-align:left;padding:18px 24px;border-bottom:1px solid rgba(20,36,64,.10);font-size:17px;line-height:1.5;vertical-align:top}
+.lic-table th{width:240px;color:var(--navy);font-weight:600;background:rgba(201,162,74,.08)}
+.lic-table em{color:var(--muted)}
+.lic-src{margin-top:28px;font-size:15px;line-height:1.65}
+.lic-src a{color:var(--navy2);text-decoration:underline;text-decoration-color:var(--gold)}
+.lic-ver{margin-top:18px;display:inline-block;border:1.5px solid var(--gold);color:var(--navy);font-weight:700;letter-spacing:.06em;padding:10px 18px}
+@media (max-width:860px){.lic-table th{width:auto}.lic-table th,.lic-table td{display:block;padding:12px 18px}.lic-table td{padding-top:0}}

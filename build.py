@@ -22,6 +22,8 @@ head_extra = ('<meta name="robots" content="noindex,nofollow">\n' if P else f'''
 {{"@context":"https://schema.org","@type":"RealEstateAgent","name":"MJN Realty","url":"{LIVE}","description":"{DESC}","telephone":"+1-518-832-9174","image":"{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg","address":{{"@type":"PostalAddress","streetAddress":"8 Triphammer Road","addressLocality":"Queensbury","addressRegion":"NY","postalCode":"12804","addressCountry":"US"}},"founder":{{"@type":"Person","name":"Matthew J. Nothdurft","jobTitle":"Licensed Real Estate Broker"}},"areaServed":[{{"@type":"Place","name":"Lake George, NY"}},{{"@type":"Place","name":"Schroon Lake, NY"}},{{"@type":"Place","name":"Queensbury, NY"}},{{"@type":"Place","name":"Glens Falls, NY"}},{{"@type":"Place","name":"Adirondacks, NY"}}]}}
 </script>
 ''')
+LIC_NAV = '<a href="license.html">License</a>' if P else ''
+LIC_FOOT = '<p><a href="license.html">License record (NYS Department of State)</a></p>' if P else ''
 preview_bar = (f'<div class="preview-bar" role="note">Preview, not live. The live site is <a href="{LIVE}">mjnrealty.com</a></div>\n' if P else "")
 
 html = f'''<!DOCTYPE html>
@@ -43,7 +45,7 @@ html = f'''<!DOCTYPE html>
   <div class="site-nav-row">
     <a class="brand" href="#top" aria-label="Matthew Nothdurft, home"><span class="mono" aria-hidden="true">MJN</span><span class="brand-name">Matthew Nothdurft</span></a>
     <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false"><span class="sr">Menu</span><span class="bars"></span></button>
-    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a><a class="callbtn" href="tel:+15188329174">Call 518-832-9174</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a>{LIC_NAV}<a class="callbtn" href="tel:+15188329174">Call 518-832-9174</a></nav>
   </div>
   <div class="wm" aria-hidden="true">MJN</div>
   <div class="hero-copy">
@@ -150,6 +152,7 @@ html = f'''<!DOCTYPE html>
       <p>NYS Housing and Anti-Discrimination Notice (Fair Housing Notice): <a href="{FH}" target="_blank" rel="noopener">{FH}</a></p>
       <p>Tenants' Rights to Reasonable Accommodations for Persons with Disabilities (NYS Division of Human Rights notice): <a href="{DHR}" target="_blank" rel="noopener">dhr.ny.gov</a></p>
       <p>Equal Housing Opportunity.</p>
+      {LIC_FOOT}
       <p class="copy">&copy; <span data-year>2026</span> MJN Realty. All rights reserved.</p>
     </div>
     <div class="eho" aria-label="Equal Housing Opportunity"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#c9a24a" stroke-width="2.2" aria-hidden="true"><path d="M4 16 17 5l13 11"/><path d="M8 13v16h18V13"/><path d="M12.5 18.5h9M12.5 23h9"/></svg></div>
@@ -164,3 +167,51 @@ for bad in ("lakefront", "dock", "lake access", "boating", "boater"):
     assert bad not in html.lower(), bad
 (out / "index.html").write_text(html)
 print("wrote", out / "index.html", mode)
+
+if P:
+    a = html.index("<header class=\"hero\">"); b = html.index("<main id=\"main\">")
+    top = html[:a].replace(f"<title>{TITLE}</title>", "<title>License record | Matthew J. Nothdurft, Licensed Real Estate Broker</title>")
+    top = top.replace('<body id="top">', '<body id="top" class="sub">')
+    nav = html[a:b]
+    nav = nav[nav.index('<div class="site-nav-row">'):nav.index('<div class="wm"')]
+    for k in ("about","services","properties","areas","contact"):
+        nav = nav.replace(f'href="#{k}"', f'href="index.html#{k}"')
+    nav = nav.replace('href="#top"', 'href="index.html"')
+    foot = html[html.index("</main>"):]
+    NS = "Not shown in the public record"
+    EA = "https://appext20.dos.ny.gov/nydos/searchByLicNumber.do"
+    OD = "https://data.ny.gov/resource/9twf-9yig.json?$q=Nothdurft"
+    OH = "https://dos.ny.gov/administrative-hearings"
+    rows = [
+        ("Name", "MATTHEW J NOTHDURFT"),
+        ("License type", "Individual Broker"),
+        ("License number", "10351205006"),
+        ("Status", "Current"),
+        ("Issue date", f'<em>{NS}</em>'),
+        ("Expiration date", "January 22, 2028"),
+        ("Business name", "NOTHDURFT MATTHEW J"),
+        ("Business address", "8 Triphammer Road, Queensbury, NY 12804 (Warren County)"),
+        ("Principal office", "License 10991209577, 8 Triphammer Road, Queensbury, NY 12804"),
+        ("Phone", f'<em>{NS}</em>'),
+        ("Disciplinary actions", f'<em>{NS}</em>. A search of the DOS Office of Administrative Hearings decisions and consent orders for "Nothdurft" returned no results on Nov 1, 2026.'),
+    ]
+    trs = "\n".join(f'      <tr><th scope="row">{k}</th><td>{v}</td></tr>' for k, v in rows)
+    page = top + f"""<header class="subhead">
+  {nav}</header>
+<main id="main">
+<section class="license">
+  <div class="wrap lic-wrap">
+    <p class="eyebrow">License record</p>
+    <h2>NYS real estate broker license</h2>
+    <p class="lic-intro">As shown in the New York State Department of State public license records.</p>
+    <table class="lic-table">
+{trs}
+    </table>
+    <p class="lic-src"><strong>Sources:</strong> NYS Department of State eAccessNY Public License Search, license number 10351205006: <a href="{EA}" target="_blank" rel="noopener">appext20.dos.ny.gov</a>. Open NY Active Real Estate Brokers dataset: <a href="{OD}" target="_blank" rel="noopener">data.ny.gov</a>. DOS administrative hearing decisions and consent orders search: <a href="{OH}" target="_blank" rel="noopener">dos.ny.gov/administrative-hearings</a>.</p>
+    <p class="lic-ver">Verified on Nov 1, 2026</p>
+  </div>
+</section>
+""" + foot
+    assert "\u2014" not in page and "\u2013" not in page
+    (out / "license.html").write_text(page)
+    print("wrote", out / "license.html")
