@@ -1,3 +1,4 @@
-# MJN Realty preview
+# MJN Realty preview (not live)
 
-Preview build of a new MJN Realty site. Not live. Pages are generated from build.py (shared header and footer). Yellow PLACEHOLDER and grey WORDING TO CONFIRM callouts mark text for Matthew to fill or approve.
+Preview of the navy homepage for mjnrealty.com. Not the live site. noindex, robots.txt disallows all, no CNAME.
+Build: python3 build.py preview .
