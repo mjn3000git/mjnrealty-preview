@@ -177,8 +177,7 @@ if P:
     ABOUT_NEW = ('<p class="eyebrow">About Matthew</p><h2>Local roots, hands-on care.</h2>\n'
                  '      <p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft is a licensed real estate broker with a deep love for the region he calls home. '
                  'He covers the Lake George and Schroon Lake regions of New York.</p>\n'
-                 '      <p>What sets him apart is a hands-on, personal approach. From routine check-ins to coordinating repairs with the right contractors and vendors, he treats every property like his own.</p>\n'
-                 '      <p>Beyond the work itself, Matthew is a local resource for the area. PADI scuba certified and an e-bike enthusiast, he knows the Adirondacks inside and out and is glad to point you toward the best of what the region has to offer.</p>\n    ')
+                 '      <p>What sets him apart is a hands-on, personal approach. From routine check-ins to coordinating repairs with the right contractors and vendors, he treats every property like his own.</p>\n    ')
     html = _rep(html, ABOUT_OLD, ABOUT_NEW)
     html = _rep(html, 'Call MJN Realty directly.', 'Call Matthew Nothdurft directly.')
     html = _rep(html, '&copy; <span data-year>2026</span> MJN Realty. All rights reserved.', f'&copy; <span data-year>2026</span> {BROKER}. All rights reserved.')
