@@ -230,32 +230,31 @@ if P:
     nav = nav.replace('href="#top"', 'href="index.html"').replace(LIC_NAV, "")
     nav = nav.replace('<a href="packages.html">', '<a href="packages.html" aria-current="page">')
     foot = html[html.index("</main>"):].replace("      " + LIC_FOOT + "\n", "")
-    D = "Drone photo and video: subject to FAA Part 107 certification"
+    SOON = "Coming soon, pending FAA Part 107 certification"
     pk = [
-      ("Ready", "For homes that need a light touch before photos.", [
-        ("Pre-listing walk-through and punch list", "$TBD"),
-        ("Small carpentry repairs and fixture swaps", "$TBD"),
-        ("Haul-away of unwanted items", "$TBD"),
-        ("Drone exterior photos (10 images)", "$TBD")]),
-      ("Refresh", "For homes that need visible exterior work.", [
-        ("Everything in Ready", "$TBD"),
-        ("Deck, porch, and siding refresh", "$TBD"),
-        ("Grab bars and railings, where needed", "$TBD"),
-        ("Drone photos plus a short aerial video", "$TBD")]),
-      ("Showcase", "For seasonal homes and camps going on the market.", [
-        ("Everything in Refresh", "$TBD"),
-        ("Seasonal camp opening before showings", "$TBD"),
-        ("Home watch while listed", "$TBD"),
-        ("Full drone photo and video set", "$TBD")]),
+      ("Punch List", "$940", "For homes that need a light touch before photos.", [
+        "Pre-listing walk-through and punch list",
+        "Small carpentry repairs and fixture swaps",
+        "Haul-away of unwanted items"], None),
+      ("Show Ready", "$1,755", "For homes that need visible fixes before showings.", [
+        "Everything in Punch List",
+        "Deck, porch, and siding refresh",
+        "Grab bars and railings, where needed"], "Drone exterior photos"),
+      ("Market Ready", "$3,220", "For seasonal homes and camps going on the market.", [
+        "Everything in Show Ready",
+        "Seasonal camp opening before showings",
+        "Home watch while listed"], "Drone photo and aerial video set"),
     ]
     cards = ""
-    for i, (name, lead, items) in enumerate(pk, 1):
-        li = "".join(f'<li><span>{x}</span><b>{y}</b></li>' for x, y in items)
+    for i, (name, price, lead, items, drone) in enumerate(pk, 1):
+        li = "".join(f'<li><span>{x}</span></li>' for x in items)
+        if drone:
+            li += f'<li class="soon"><span>{drone}</span><b>{SOON}</b></li>'
         cards += (f'    <article class="pkg"><p class="pkg-n">0{i}</p><h3>{name}</h3><p class="pkg-lead">{lead}</p>\n'
                   f'      <ul class="pkg-items">{li}</ul>\n'
-                  f'      <p class="pkg-total"><span>Adirondack Craftworks package price</span><b>$TBD</b></p>\n'
-                  f'      <p class="pkg-note">{D}.</p>\n'
-                  f'      <p class="pkg-note">Listing with MJN Realty: broker commission is separate. See below.</p>\n'
+                  f'      <p class="pkg-total"><span>Adirondack Craftworks package price</span><b>{price}</b></p>\n'
+                  f'      <p class="pkg-note">Materials and sales tax extra.</p>\n'
+                  f'      <p class="pkg-note">Does not include listing your home. Brokerage is a separate service. See below.</p>\n'
                   f'    </article>\n')
     page = top + f"""<header class="subhead">
   {nav}</header>
@@ -264,8 +263,8 @@ if P:
   <div class="wrap pkg-wrap">
     <p class="eyebrow">List-ready packages</p>
     <h2>Get your home ready to list</h2>
-    <p class="lic-intro">Bundles of pre-listing repairs from Adirondack Craftworks and drone photo and video, paired with listing your home with MJN Realty. Prices will be posted soon.</p>
-    <p class="pkg-flag">All prices are placeholders ($TBD).</p>
+    <p class="lic-intro">Bundles of pre-listing repairs and drone media from Adirondack Craftworks, for owners getting ready to sell. Listing with MJN Realty is a separate service. </p>
+    <p class="pkg-flag">Proposed pricing, not final. Materials and sales tax extra.</p>
     <h3 class="pkg-sec">Adirondack Craftworks services</h3>
     <p class="pkg-sub">Pre-listing repairs and media. These are home services, not real estate services. Adirondack Craftworks does not offer licensed plumbing or electrical work.</p>
     <div class="pkg-grid">
@@ -277,15 +276,15 @@ if P:
     <p class="eyebrow">Real estate brokerage</p>
     <h2>Listing with MJN Realty</h2>
     <div class="broker-box">
-      <p class="broker-fee"><span>Broker commission</span><b>$TBD</b></p>
+      <p class="broker-fee"><span>Broker commission</span><b>Negotiable</b></p>
       <ul class="broker-list">
         <li>Real estate brokerage services are provided by Matthew J. Nothdurft, Licensed Real Estate Broker, doing business as MJN Realty.</li>
-        <li>Broker commission is a separate service from, and is not included in, any Adirondack Craftworks package or service price.</li>
-        <li>Commissions are not set by law. The commission is fully negotiable between you and the broker and will be set out in a written listing agreement.</li>
-        <li>You do not have to use Adirondack Craftworks, or buy any package, to list your home with MJN Realty. You are free to use any contractor or photographer you choose.</li>
+        <li>Listing your home is a separate service, with its own written listing agreement and its own commission. The commission is never part of any Adirondack Craftworks package or service price.</li>
+        <li>Commissions are not set by law. The commission is fully negotiable between you and the broker.</li>
+        <li>Listing with MJN Realty is not conditional on buying any Adirondack Craftworks services. You are free to use any contractor or photographer you choose.</li>
         <li>Buying a package does not require you to list with MJN Realty.</li>
-        <li>MJN Realty and Adirondack Craftworks are affiliated businesses. <span class="pkg-ph">[PLACEHOLDER: affiliated business disclosure wording, pending review]</span></li>
       </ul>
+      <p class="disclose"><strong>Disclosure:</strong> Matthew Nothdurft owns Adirondack Craftworks and profits from the services it sells.</p>
       <p class="broker-cta"><a class="btn gold" href="tel:+15188329174">Call 518-832-9174</a></p>
     </div>
   </div>
