@@ -172,3 +172,6 @@ footer .copy{margin-top:10px;color:rgba(246,244,238,.6);font-size:13px}
 .pkg-items li.soon{color:var(--muted);flex-direction:column;gap:2px}
 .pkg-items li.soon b{color:#7a5a10;white-space:normal;font-size:13px}
 .disclose{margin-top:22px;padding:14px 18px;border-left:3px solid var(--gold);background:rgba(14,26,47,.5);font-size:15px;line-height:1.6}
+.addon{margin-top:28px;background:#fff;border-left:3px solid var(--gold);box-shadow:0 12px 30px rgba(20,36,64,.08);padding:22px 28px;max-width:760px}
+.addon-row{margin-top:8px;display:flex;justify-content:space-between;gap:16px;font-size:17px;font-weight:600;color:var(--navy)}
+.addon-row b{white-space:nowrap}

@@ -220,8 +220,8 @@ if P:
 if P:
     # List-ready packages page (preview only). No license.html links on this page.
     a = html.index("<header class=\"hero\">"); b = html.index("<main id=\"main\">")
-    top = html[:a].replace(f"<title>{TITLE}</title>", "<title>List-ready packages | MJN Realty</title>")
-    top = top.replace(f'content="{DESC}"', 'content="MJN Realty list-ready packages: pre-listing repairs and drone media, offered separately from real estate brokerage services."')
+    top = html[:a].replace(f"<title>{TITLE}</title>", "<title>List-ready packages | Matthew J. Nothdurft, Licensed Real Estate Broker</title>")
+    top = top.replace(f'content="{DESC}"', 'content="List-ready packages: pre-listing repairs and drone media from Adirondack Craftworks, offered separately from real estate brokerage by Matthew J. Nothdurft, Licensed Real Estate Broker."')
     top = top.replace('<body id="top">', '<body id="top" class="sub">')
     nav = html[a:b]
     nav = nav[nav.index('<div class="site-nav-row">'):nav.index('<div class="wm"')]
@@ -232,27 +232,29 @@ if P:
     foot = html[html.index("</main>"):].replace("      " + LIC_FOOT + "\n", "")
     SOON = "Coming soon, pending FAA Part 107 certification"
     pk = [
-      ("Punch List", "$940", "For homes that need a light touch before photos.", [
-        "Pre-listing walk-through and punch list",
-        "Small carpentry repairs and fixture swaps",
-        "Haul-away of unwanted items"], None),
-      ("Show Ready", "$1,755", "For homes that need visible fixes before showings.", [
-        "Everything in Punch List",
-        "Deck, porch, and siding refresh",
-        "Grab bars and railings, where needed"], "Drone exterior photos"),
-      ("Market Ready", "$3,220", "For seasonal homes and camps going on the market.", [
-        "Everything in Show Ready",
-        "Seasonal camp opening before showings",
-        "Home watch while listed"], "Drone photo and aerial video set"),
+      ("Punch List", "$940", None, "For homes that need a light touch before photos.", [
+        "Walk-through and punch list",
+        "Up to 8 hours of repair work",
+        "1 haul-away load"], None),
+      ("Show Ready", "$1,460", "$1,755", "For homes that need visible fixes before showings.", [
+        "Walk-through and punch list",
+        "Up to 16 hours of repair work",
+        "1 haul-away load"], "Drone media"),
+      ("Market Ready", "$2,725", "$3,220", "For homes that need repair and refresh work before going on the market.", [
+        "Walk-through and punch list",
+        "About 32 hours of repair and refresh work",
+        "2 haul-away loads"], "Drone stills and video"),
     ]
     cards = ""
-    for i, (name, price, lead, items, drone) in enumerate(pk, 1):
+    for i, (name, price, dprice, lead, items, drone) in enumerate(pk, 1):
         li = "".join(f'<li><span>{x}</span></li>' for x in items)
         if drone:
             li += f'<li class="soon"><span>{drone}</span><b>{SOON}</b></li>'
+        withd = f'      <p class="pkg-note">{dprice} with {drone.lower()} once available.</p>\n' if dprice else ""
         cards += (f'    <article class="pkg"><p class="pkg-n">0{i}</p><h3>{name}</h3><p class="pkg-lead">{lead}</p>\n'
                   f'      <ul class="pkg-items">{li}</ul>\n'
-                  f'      <p class="pkg-total"><span>Adirondack Craftworks package price</span><b>{price}</b></p>\n'
+                  f'      <p class="pkg-total"><span>Adirondack Craftworks package price{" now" if dprice else ""}</span><b>{price}</b></p>\n'
+                  + withd +
                   f'      <p class="pkg-note">Materials and sales tax extra.</p>\n'
                   f'      <p class="pkg-note">Does not include listing your home. Brokerage is a separate service. See below.</p>\n'
                   f'    </article>\n')
@@ -263,26 +265,32 @@ if P:
   <div class="wrap pkg-wrap">
     <p class="eyebrow">List-ready packages</p>
     <h2>Get your home ready to list</h2>
-    <p class="lic-intro">Bundles of pre-listing repairs and drone media from Adirondack Craftworks, for owners getting ready to sell. Listing with MJN Realty is a separate service. </p>
+    <p class="lic-intro">Bundles of pre-listing repairs and drone media from Adirondack Craftworks, for owners getting ready to sell. Listing with Matthew J. Nothdurft, Licensed Real Estate Broker, is a separate service. </p>
     <p class="pkg-flag">Proposed pricing, not final. Materials and sales tax extra.</p>
     <h3 class="pkg-sec">Adirondack Craftworks services</h3>
     <p class="pkg-sub">Pre-listing repairs and media. These are home services, not real estate services. Adirondack Craftworks does not offer licensed plumbing or electrical work.</p>
     <div class="pkg-grid">
 {cards}    </div>
+    <div class="addon">
+      <p class="eyebrow">Optional add-on</p>
+      <p class="addon-row"><span>Home watch while listed (Basic home watch rate)</span><b>$149 a month</b></p>
+      <p class="pkg-note">Adirondack Craftworks service. Proposed pricing, not final.</p>
+    </div>
   </div>
 </section>
 <section class="broker" id="brokerage">
   <div class="wrap pkg-wrap">
     <p class="eyebrow">Real estate brokerage</p>
-    <h2>Listing with MJN Realty</h2>
+    <!-- LEGAL REVIEW: MJN Realty name not filed with DOS -->
+    <h2>Listing with Matthew J. Nothdurft, Licensed Real Estate Broker</h2>
     <div class="broker-box">
       <p class="broker-fee"><span>Broker commission</span><b>Negotiable</b></p>
       <ul class="broker-list">
-        <li>Real estate brokerage services are provided by Matthew J. Nothdurft, Licensed Real Estate Broker, doing business as MJN Realty.</li>
+        <li>Real estate brokerage services are provided by Matthew J. Nothdurft, Licensed Real Estate Broker.</li>
         <li>Listing your home is a separate service, with its own written listing agreement and its own commission. The commission is never part of any Adirondack Craftworks package or service price.</li>
         <li>Commissions are not set by law. The commission is fully negotiable between you and the broker.</li>
-        <li>Listing with MJN Realty is not conditional on buying any Adirondack Craftworks services. You are free to use any contractor or photographer you choose.</li>
-        <li>Buying a package does not require you to list with MJN Realty.</li>
+        <li>Listing with Matthew J. Nothdurft, Licensed Real Estate Broker, is not conditional on buying any Adirondack Craftworks services. You are free to use any contractor or photographer you choose.</li>
+        <li>Buying a package does not require you to list with Matthew J. Nothdurft, Licensed Real Estate Broker.</li>
       </ul>
       <p class="disclose"><strong>Disclosure:</strong> Matthew Nothdurft owns Adirondack Craftworks and profits from the services it sells.</p>
       <p class="broker-cta"><a class="btn gold" href="tel:+15188329174">Call 518-832-9174</a></p>
