@@ -4,8 +4,8 @@ import sys, pathlib
 mode, out = sys.argv[1], pathlib.Path(sys.argv[2])
 assert mode in ("preview", "live")
 P = mode == "preview"
-DESC = "MJN Realty. Real estate, seasonal rentals, and property management in the Adirondack region of New York."
-TITLE = "MJN Realty | Adirondack Real Estate and Property Management"
+DESC = "Matthew J. Nothdurft, Licensed Real Estate Broker. Real estate, seasonal rentals, and property management in the Adirondack region of New York."
+TITLE = "Matthew J. Nothdurft, Licensed Real Estate Broker | Adirondack Real Estate and Property Management"
 FH = "https://dos.ny.gov/fair-housing-notice"
 DHR = "https://dhr.ny.gov/final-regulations-regarding-notice-tenants-rights-reasonable-accommodation"
 LIVE = "https://mjnrealty.com/"
@@ -17,14 +17,14 @@ if P:
 
 head_extra = ('<meta name="robots" content="noindex,nofollow">\n' if P else f'''<link rel="canonical" href="{LIVE}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="MJN Realty">
+<meta property="og:site_name" content="{BROKER}">
 <meta property="og:title" content="{TITLE}">
 <meta property="og:description" content="{DESC}">
 <meta property="og:url" content="{LIVE}">
 <meta property="og:image" content="{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"MJN Realty","url":"{LIVE}","description":"{DESC}","telephone":"+1-518-832-9174","image":"{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg","address":{{"@type":"PostalAddress","streetAddress":"8 Triphammer Road","addressLocality":"Queensbury","addressRegion":"NY","postalCode":"12804","addressCountry":"US"}},"founder":{{"@type":"Person","name":"Matthew J. Nothdurft","jobTitle":"Licensed Real Estate Broker"}},"areaServed":[{{"@type":"Place","name":"Lake George, NY"}},{{"@type":"Place","name":"Schroon Lake, NY"}},{{"@type":"Place","name":"Queensbury, NY"}},{{"@type":"Place","name":"Glens Falls, NY"}},{{"@type":"Place","name":"Adirondacks, NY"}}]}}
+{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"{BROKER}","url":"{LIVE}","description":"{DESC}","telephone":"+1-518-832-9174","image":"{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg","address":{{"@type":"PostalAddress","streetAddress":"8 Triphammer Road","addressLocality":"Queensbury","addressRegion":"NY","postalCode":"12804","addressCountry":"US"}},"founder":{{"@type":"Person","name":"Matthew J. Nothdurft","jobTitle":"Licensed Real Estate Broker"}},"areaServed":[{{"@type":"Place","name":"Lake George, NY"}},{{"@type":"Place","name":"Schroon Lake, NY"}},{{"@type":"Place","name":"Queensbury, NY"}},{{"@type":"Place","name":"Glens Falls, NY"}},{{"@type":"Place","name":"Adirondacks, NY"}}]}}
 </script>
 ''')
 LIC_NAV = '<a href="license.html">License</a>' if P else ''
@@ -106,9 +106,9 @@ html = f'''<!DOCTYPE html>
 <section id="about" class="about">
   <div class="wrap about-grid">
     <figure class="about-photo"><img src="images/matthew-nothdurft.jpg" alt="Matthew Nothdurft" width="671" height="894" loading="lazy"><figcaption>Matthew J. Nothdurft<br><span>Licensed Real Estate Broker</span></figcaption></figure>
-    <div class="about-text"><p class="eyebrow">About MJN Realty</p><h2>Local roots, hands-on care.</h2>
-      <p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft leads MJN Realty with a deep love for the region he calls home.</p>
-      <p>MJN Realty is a full-service property management and real estate company covering the Lake George and Schroon Lake regions of New York.</p>
+    <div class="about-text"><p class="eyebrow">About Matthew</p><h2>Local roots, hands-on care.</h2>
+      <p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft is a licensed real estate broker with a deep love for the region he calls home.</p>
+      <p>We offer full-service property management and real estate services covering the Lake George and Schroon Lake regions of New York.</p>
       <p>What sets us apart is a hands-on, personal approach. From routine check-ins to coordinating repairs with the right contractors and vendors, we treat every property like our own.</p>
       <p>Beyond the work itself, Matthew is a local resource for the area. PADI scuba certified and an e-bike enthusiast, he knows the Adirondacks inside and out and is glad to point you toward the best of what the region has to offer.</p>
     </div>
@@ -128,7 +128,7 @@ html = f'''<!DOCTYPE html>
 <section id="contact" class="contact">
   <div class="wrap"><p class="eyebrow">Contact</p><h2>Let's talk</h2><div class="contact-grid">
   <div class="contact-info">
-    <p class="contact-lead">Questions about buying, selling, renting, or caring for an Adirondack home? Call MJN Realty directly.</p>
+    <p class="contact-lead">Questions about buying, selling, renting, or caring for an Adirondack home? Call Matthew Nothdurft directly.</p>
     <p class="contact-phone"><span>Office</span><a href="tel:+15188329174">518-832-9174</a></p>
     <p class="contact-region"><span>Based in</span>The Adirondack region of New York</p>
   </div>
@@ -159,7 +159,7 @@ html = f'''<!DOCTYPE html>
       <p>Tenants' Rights to Reasonable Accommodations for Persons with Disabilities (NYS Division of Human Rights notice): <a href="{DHR}" target="_blank" rel="noopener">dhr.ny.gov</a></p>
       <p>Equal Housing Opportunity.</p>
       {LIC_FOOT}
-      <p class="copy">&copy; <span data-year>2026</span> MJN Realty. All rights reserved.</p>
+      <p class="copy">&copy; <span data-year>2026</span> {BROKER}. All rights reserved.</p>
     </div>
     <div class="eho" aria-label="Equal Housing Opportunity"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#c9a24a" stroke-width="2.2" aria-hidden="true"><path d="M4 16 17 5l13 11"/><path d="M8 13v16h18V13"/><path d="M12.5 18.5h9M12.5 23h9"/></svg></div>
   </div>
@@ -173,22 +173,19 @@ if P:
     def _rep(s, old, new):
         assert s.count(old) == 1, old
         return s.replace(old, new)
-    ABOUT_OLD = html[html.index('<p class="eyebrow">About MJN Realty</p>'):html.index('</div>', html.index('<div class="about-text">'))]
+    ABOUT_OLD = html[html.index('<p class="eyebrow">About Matthew</p>'):html.index('</div>', html.index('<div class="about-text">'))]
     ABOUT_NEW = ('<p class="eyebrow">About Matthew</p><h2>Local roots, hands-on care.</h2>\n'
                  '      <p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft is a licensed real estate broker with a deep love for the region he calls home. '
                  'He covers the Lake George and Schroon Lake regions of New York.</p>\n'
                  '      <p>What sets him apart is a hands-on, personal approach. From routine check-ins to coordinating repairs with the right contractors and vendors, he treats every property like his own.</p>\n    ')
     html = _rep(html, ABOUT_OLD, ABOUT_NEW)
-    html = _rep(html, 'Call MJN Realty directly.', 'Call Matthew Nothdurft directly.')
-    html = _rep(html, '&copy; <span data-year>2026</span> MJN Realty. All rights reserved.', f'&copy; <span data-year>2026</span> {BROKER}. All rights reserved.')
     html = _rep(html, '<a href="#properties">Properties</a>', '<a href="#properties">Properties</a><a href="hayes.html">41 Hayes</a>')
     html = _rep(html, '<div class="tag">Family-owned property</div>', '<div class="tag">Showcase property</div>')
     html = _rep(html, '<p class="desc">Family-owned property.</p>', '<p class="desc">A family home, cared for like one. Seasonal rental coming soon.</p>')
     html = _rep(html, '<a class="more" href="https://41hayes.com" target="_blank" rel="noopener">Visit 41hayes.com &rarr;</a>',
                 '<a class="more" href="hayes.html">See 41 Hayes Road &rarr;</a>')
 assert "\u2014" not in html and "\u2013" not in html
-if P:
-    assert "mjn real" not in html.lower()
+assert "mjn real" not in html.lower()
 for bad in ("lakefront", "dock", "lake access", "boating", "boater"):
     assert bad not in html.lower(), bad
 (out / "index.html").write_text(html)
