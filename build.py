@@ -23,6 +23,7 @@ head_extra = ('<meta name="robots" content="noindex,nofollow">\n' if P else f'''
 </script>
 ''')
 LIC_NAV = '<a href="license.html">License</a>' if P else ''
+PKG_NAV = '<a href="packages.html">Packages</a>' if P else ''
 LIC_FOOT = '<p><a href="license.html">License record (NYS Department of State)</a></p>' if P else ''
 preview_bar = (f'<div class="preview-bar" role="note">Preview, not live. The live site is <a href="{LIVE}">mjnrealty.com</a></div>\n' if P else "")
 
@@ -45,7 +46,7 @@ html = f'''<!DOCTYPE html>
   <div class="site-nav-row">
     <a class="brand" href="#top" aria-label="Matthew Nothdurft, home"><span class="mono" aria-hidden="true">MJN</span><span class="brand-name">Matthew Nothdurft</span></a>
     <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false"><span class="sr">Menu</span><span class="bars"></span></button>
-    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a>{LIC_NAV}<a class="callbtn" href="tel:+15188329174">Call 518-832-9174</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a>{PKG_NAV}{LIC_NAV}<a class="callbtn" href="tel:+15188329174">Call 518-832-9174</a></nav>
   </div>
   <div class="wm" aria-hidden="true">MJN</div>
   <div class="hero-copy">
@@ -215,3 +216,83 @@ if P:
     assert "\u2014" not in page and "\u2013" not in page
     (out / "license.html").write_text(page)
     print("wrote", out / "license.html")
+
+if P:
+    # List-ready packages page (preview only). No license.html links on this page.
+    a = html.index("<header class=\"hero\">"); b = html.index("<main id=\"main\">")
+    top = html[:a].replace(f"<title>{TITLE}</title>", "<title>List-ready packages | MJN Realty</title>")
+    top = top.replace(f'content="{DESC}"', 'content="MJN Realty list-ready packages: pre-listing repairs and drone media, offered separately from real estate brokerage services."')
+    top = top.replace('<body id="top">', '<body id="top" class="sub">')
+    nav = html[a:b]
+    nav = nav[nav.index('<div class="site-nav-row">'):nav.index('<div class="wm"')]
+    for k in ("about","services","properties","areas","contact"):
+        nav = nav.replace(f'href="#{k}"', f'href="index.html#{k}"')
+    nav = nav.replace('href="#top"', 'href="index.html"').replace(LIC_NAV, "")
+    nav = nav.replace('<a href="packages.html">', '<a href="packages.html" aria-current="page">')
+    foot = html[html.index("</main>"):].replace("      " + LIC_FOOT + "\n", "")
+    D = "Drone photo and video: subject to FAA Part 107 certification"
+    pk = [
+      ("Ready", "For homes that need a light touch before photos.", [
+        ("Pre-listing walk-through and punch list", "$TBD"),
+        ("Small carpentry repairs and fixture swaps", "$TBD"),
+        ("Haul-away of unwanted items", "$TBD"),
+        ("Drone exterior photos (10 images)", "$TBD")]),
+      ("Refresh", "For homes that need visible exterior work.", [
+        ("Everything in Ready", "$TBD"),
+        ("Deck, porch, and siding refresh", "$TBD"),
+        ("Grab bars and railings, where needed", "$TBD"),
+        ("Drone photos plus a short aerial video", "$TBD")]),
+      ("Showcase", "For seasonal homes and camps going on the market.", [
+        ("Everything in Refresh", "$TBD"),
+        ("Seasonal camp opening before showings", "$TBD"),
+        ("Home watch while listed", "$TBD"),
+        ("Full drone photo and video set", "$TBD")]),
+    ]
+    cards = ""
+    for i, (name, lead, items) in enumerate(pk, 1):
+        li = "".join(f'<li><span>{x}</span><b>{y}</b></li>' for x, y in items)
+        cards += (f'    <article class="pkg"><p class="pkg-n">0{i}</p><h3>{name}</h3><p class="pkg-lead">{lead}</p>\n'
+                  f'      <ul class="pkg-items">{li}</ul>\n'
+                  f'      <p class="pkg-total"><span>Adirondack Craftworks package price</span><b>$TBD</b></p>\n'
+                  f'      <p class="pkg-note">{D}.</p>\n'
+                  f'      <p class="pkg-note">Listing with MJN Realty: broker commission is separate. See below.</p>\n'
+                  f'    </article>\n')
+    page = top + f"""<header class="subhead">
+  {nav}</header>
+<main id="main">
+<section class="pkgs">
+  <div class="wrap pkg-wrap">
+    <p class="eyebrow">List-ready packages</p>
+    <h2>Get your home ready to list</h2>
+    <p class="lic-intro">Bundles of pre-listing repairs from Adirondack Craftworks and drone photo and video, paired with listing your home with MJN Realty. Prices will be posted soon.</p>
+    <p class="pkg-flag">All prices are placeholders ($TBD).</p>
+    <h3 class="pkg-sec">Adirondack Craftworks services</h3>
+    <p class="pkg-sub">Pre-listing repairs and media. These are home services, not real estate services. Adirondack Craftworks does not offer licensed plumbing or electrical work.</p>
+    <div class="pkg-grid">
+{cards}    </div>
+  </div>
+</section>
+<section class="broker" id="brokerage">
+  <div class="wrap pkg-wrap">
+    <p class="eyebrow">Real estate brokerage</p>
+    <h2>Listing with MJN Realty</h2>
+    <div class="broker-box">
+      <p class="broker-fee"><span>Broker commission</span><b>$TBD</b></p>
+      <ul class="broker-list">
+        <li>Real estate brokerage services are provided by Matthew J. Nothdurft, Licensed Real Estate Broker, doing business as MJN Realty.</li>
+        <li>Broker commission is a separate service from, and is not included in, any Adirondack Craftworks package or service price.</li>
+        <li>Commissions are not set by law. The commission is fully negotiable between you and the broker and will be set out in a written listing agreement.</li>
+        <li>You do not have to use Adirondack Craftworks, or buy any package, to list your home with MJN Realty. You are free to use any contractor or photographer you choose.</li>
+        <li>Buying a package does not require you to list with MJN Realty.</li>
+        <li>MJN Realty and Adirondack Craftworks are affiliated businesses. <span class="pkg-ph">[PLACEHOLDER: affiliated business disclosure wording, pending review]</span></li>
+      </ul>
+      <p class="broker-cta"><a class="btn gold" href="tel:+15188329174">Call 518-832-9174</a></p>
+    </div>
+  </div>
+</section>
+""" + foot
+    assert "\u2014" not in page and "\u2013" not in page
+    for bad in ("lakefront", "dock", "lake access", "boat", "license.html", "family-owned", "mj and"):
+        assert bad not in page.lower(), bad
+    (out / "packages.html").write_text(page)
+    print("wrote", out / "packages.html")

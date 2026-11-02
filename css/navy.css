@@ -142,3 +142,30 @@ footer .copy{margin-top:10px;color:rgba(246,244,238,.6);font-size:13px}
 .lic-src a{color:var(--navy2);text-decoration:underline;text-decoration-color:var(--gold)}
 .lic-ver{margin-top:18px;display:inline-block;border:1.5px solid var(--gold);color:var(--navy);font-weight:700;letter-spacing:.06em;padding:10px 18px}
 @media (max-width:860px){.lic-table th{width:auto}.lic-table th,.lic-table td{display:block;padding:12px 18px}.lic-table td{padding-top:0}}
+.pkgs{padding-top:80px}
+.pkg-wrap{max-width:1180px}
+.pkg-flag{margin-top:18px;display:inline-block;background:#fff3b0;color:#3a2a00;border:2px dashed #b88a00;font-weight:700;font-size:14px;padding:6px 12px}
+.pkg-sec{margin-top:44px;font-family:'Playfair Display',serif;font-size:30px;color:var(--navy)}
+.pkg-sub{margin-top:8px;font-size:16px;color:var(--muted);max-width:760px;line-height:1.6}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:28px}
+.pkg{background:#fff;border-top:3px solid var(--gold);box-shadow:0 12px 30px rgba(20,36,64,.08);padding:32px 28px;display:flex;flex-direction:column}
+.pkg-n{font-family:'Playfair Display',serif;color:var(--gold);font-size:22px}
+.pkg h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy);margin-top:4px}
+.pkg-lead{margin-top:8px;font-size:15px;color:#3b4456;line-height:1.55}
+.pkg-items{list-style:none;margin-top:18px}
+.pkg-items li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid rgba(20,36,64,.10);font-size:15px;line-height:1.45}
+.pkg-items b,.pkg-total b{color:var(--navy);white-space:nowrap}
+.pkg-total{margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;gap:14px;border-top:2px solid var(--gold);font-weight:600;font-size:15px}
+.pkg-note{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.5}
+.pkg-ph{background:#fff3b0;color:#3a2a00;border:1px dashed #b88a00;padding:1px 6px;font-weight:600}
+.broker{background:var(--navy);color:var(--cream)}
+.broker h2{color:#fff}
+.broker-box{margin-top:32px;border:1.5px solid var(--gold);padding:36px;max-width:900px}
+.broker-fee{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid rgba(201,162,74,.35);padding-bottom:18px}
+.broker-fee span{color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.broker-fee b{font-family:'Playfair Display',serif;font-size:34px;color:#fff}
+.broker-list{margin-top:18px;padding-left:20px;font-size:16px;line-height:1.65}
+.broker-list li{margin-top:10px}
+.broker-cta{margin-top:26px}
+@media (max-width:1100px){.pkg-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.pkg-grid{grid-template-columns:1fr}.broker-box{padding:24px}.pkgs{padding-top:60px}}
