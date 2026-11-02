@@ -175,3 +175,27 @@ footer .copy{margin-top:10px;color:rgba(246,244,238,.6);font-size:13px}
 .addon{margin-top:28px;background:#fff;border-left:3px solid var(--gold);box-shadow:0 12px 30px rgba(20,36,64,.08);padding:22px 28px;max-width:760px}
 .addon-row{margin-top:8px;display:flex;justify-content:space-between;gap:16px;font-size:17px;font-weight:600;color:var(--navy)}
 .addon-row b{white-space:nowrap}
+.pkg-alc{margin-top:14px;font-size:17px;font-weight:600;color:var(--navy)}
+.hayes-hero{position:relative;background:url(../images/hayes-front-of-house.jpg) center 35%/cover var(--navy);color:#fff;min-height:620px}
+.hayes-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,36,64,.92) 0%,rgba(20,36,64,.75) 45%,rgba(20,36,64,.2) 80%)}
+.hayes-copy{position:relative;z-index:2;padding:90px 72px 100px;max-width:860px}
+.hayes-copy h1{font-family:'Playfair Display',serif;font-size:64px;line-height:1.05;margin-top:14px}
+.hayes-sub{margin-top:18px;font-family:'Playfair Display',serif;font-style:italic;font-size:24px}
+.hayes-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start}
+.hayes-lead{margin-top:22px;font-size:19px;line-height:1.65}
+.hl{list-style:none;margin-top:24px}
+.hl li{padding:12px 0 12px 28px;border-top:1px solid rgba(20,36,64,.12);position:relative;font-size:17px}
+.hl li:before{content:"";position:absolute;left:4px;top:20px;width:10px;height:10px;background:var(--gold);transform:rotate(45deg)}
+.garage{margin-top:24px;padding:16px 20px;border-left:3px solid var(--gold);background:#fff;font-size:16px;line-height:1.6}
+.hayes-main img{width:100%;height:auto;box-shadow:0 20px 50px rgba(20,36,64,.18)}
+.hayes-main figcaption,.gal figcaption{margin-top:10px;font-size:13px;color:var(--muted);letter-spacing:.06em}
+.hayes-gallery{padding-top:0}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hayes-avail{background:var(--navy);color:var(--cream)}
+.hayes-avail h2{color:#fff}
+.avail-box{max-width:900px}
+.avail-box p{margin-top:14px;font-size:18px}
+.vrbo{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px!important;padding:8px 14px}
+@media (max-width:860px){.hayes-copy{padding:60px 36px 70px}.hayes-copy h1{font-size:42px}.hayes-grid,.gal{grid-template-columns:1fr}.hayes-hero{min-height:auto}}
+@media (max-width:520px){.hayes-copy{padding-left:20px;padding-right:20px}.hayes-copy h1{font-size:34px}}

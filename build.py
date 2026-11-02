@@ -163,6 +163,22 @@ html = f'''<!DOCTYPE html>
 </body>
 </html>
 '''
+if P:
+    # Preview-only homepage edits: merged bio, 41 Hayes nav item, featured card links to hayes.html.
+    def _rep(s, old, new):
+        assert s.count(old) == 1, old
+        return s.replace(old, new)
+    BIO_OLD = '<p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft leads MJN Realty with a deep love for the region he calls home.</p>'
+    BIO_NEW = ('<p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft leads MJN Realty with a deep love for the region he calls home. '
+               'Before real estate, he spent 17 years as a property and auto claims adjuster, handling homeowner and auto claims, including large loss and total loss contents claims. '
+               'That work taught him the construction process, and the devastating loss people face after a flood or fire. '
+               'He brings that same empathy to every client, and a knack for connecting people with the right help to get back on their feet after the unexpected.</p>')
+    html = _rep(html, BIO_OLD, BIO_NEW)
+    html = _rep(html, '<a href="#properties">Properties</a>', '<a href="#properties">Properties</a><a href="hayes.html">41 Hayes</a>')
+    html = _rep(html, '<div class="tag">Family-owned property</div>', '<div class="tag">Showcase property</div>')
+    html = _rep(html, '<p class="desc">Family-owned property.</p>', '<p class="desc">A family home, cared for like one. Seasonal rental coming soon.</p>')
+    html = _rep(html, '<a class="more" href="https://41hayes.com" target="_blank" rel="noopener">Visit 41hayes.com &rarr;</a>',
+                '<a class="more" href="hayes.html">See 41 Hayes Road &rarr;</a>')
 assert "\u2014" not in html and "\u2013" not in html
 for bad in ("lakefront", "dock", "lake access", "boating", "boater"):
     assert bad not in html.lower(), bad
@@ -266,6 +282,7 @@ if P:
     <p class="eyebrow">List-ready packages</p>
     <h2>Get your home ready to list</h2>
     <p class="lic-intro">Bundles of pre-listing repairs and drone media from Adirondack Craftworks, for owners getting ready to sell. Listing with Matthew J. Nothdurft, Licensed Real Estate Broker, is a separate service. </p>
+    <p class="pkg-alc">These packages are a starting point. Every item can be added, removed or adjusted a la carte to fit your property.</p>
     <p class="pkg-flag">Proposed pricing, not final. Materials and sales tax extra.</p>
     <h3 class="pkg-sec">Adirondack Craftworks services</h3>
     <p class="pkg-sub">Pre-listing repairs and media. These are home services, not real estate services. Adirondack Craftworks does not offer licensed plumbing or electrical work.</p>
@@ -303,3 +320,76 @@ if P:
         assert bad not in page.lower(), bad
     (out / "packages.html").write_text(page)
     print("wrote", out / "packages.html")
+
+if P:
+    # 41 Hayes Road page (preview only). Facts reused from 41hayes.com: 4 bedrooms, 3 baths, sleeps 8;
+    # 41 Hayes Road, Schroon Lake, NY 12870; near I-87; day trips to Lake George and Lake Placid; prepared with care before every arrival.
+    PV = "https://mjn3000git.github.io/mjnrealty-preview/"
+    HT = "41 Hayes Road | A family home for the season in Schroon Lake, NY"
+    HD = "Seasonal and long-term rental in Schroon Lake, New York. 4 bedrooms, 3 baths, sleeps 8. Bookings not open yet. Coming soon to VRBO."
+    a = html.index("<header class=\"hero\">"); b = html.index("<main id=\"main\">")
+    top = html[:a].replace(f"<title>{TITLE}</title>", f"<title>{HT}</title>")
+    top = top.replace(f'content="{DESC}"', f'content="{HD}"')
+    og = (f'<meta property="og:type" content="website">\n<meta property="og:site_name" content="MJN Realty">\n'
+          f'<meta property="og:title" content="{HT}">\n<meta property="og:description" content="{HD}">\n'
+          f'<meta property="og:url" content="{PV}hayes.html">\n<meta property="og:image" content="{PV}images/hayes-front-of-house.jpg">\n'
+          f'<meta property="og:image:alt" content="The front of the house at 41 Hayes Road, Schroon Lake, New York">\n'
+          f'<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="{HT}">\n'
+          f'<meta name="twitter:description" content="{HD}">\n<meta name="twitter:image" content="{PV}images/hayes-front-of-house.jpg">\n')
+    top = top.replace('<meta name="robots" content="noindex,nofollow">\n', '<meta name="robots" content="noindex,nofollow">\n' + og)
+    top = top.replace('<body id="top">', '<body id="top" class="sub">')
+    nav = html[a:b]
+    nav = nav[nav.index('<div class="site-nav-row">'):nav.index('<div class="wm"')]
+    for k in ("about","services","properties","areas","contact"):
+        nav = nav.replace(f'href="#{k}"', f'href="index.html#{k}"')
+    nav = nav.replace('href="#top"', 'href="index.html"').replace(LIC_NAV, "")
+    nav = nav.replace('<a href="hayes.html">', '<a href="hayes.html" aria-current="page">')
+    foot = html[html.index("</main>"):].replace("      " + LIC_FOOT + "\n", "")
+    page = top + f"""<header class="hayes-hero">
+  {nav}<div class="hayes-copy">
+    <p class="eyebrow">Showcase property &middot; Schroon Lake, New York</p>
+    <h1>A family home in the Adirondacks, ready for your season</h1>
+    <p class="hayes-sub">41 Hayes Road &middot; Seasonal and long-term rental</p>
+    <div class="btns"><a class="btn gold" href="#availability">Get notified when dates open</a></div>
+  </div>
+</header>
+<main id="main">
+<section class="hayes-intro">
+  <div class="wrap hayes-grid">
+    <div>
+      <p class="eyebrow">The Hayes House</p>
+      <h2>Cared for like a family home</h2>
+      <p class="hayes-lead">41 Hayes Road is a showcase property and seasonal rental in Schroon Lake, New York. It is Matthew's family home, so it gets the care a family home deserves, and the house is prepared with care before every arrival.</p>
+      <ul class="hl">
+        <li>4 bedrooms &middot; 3 baths &middot; sleeps 8</li>
+        <li>Schroon Lake, New York, near the water, in the heart of the Adirondacks</li>
+        <li>Minutes from I-87, the Adirondack Northway</li>
+        <li>Day trips to Lake George and Lake Placid</li>
+        <li>Seasonal and long-term stays</li>
+      </ul>
+      <p class="garage"><strong>Please note:</strong> The large garage behind the house is private storage and is not part of the rental.</p>
+    </div>
+    <figure class="hayes-main"><img src="images/hayes-front-of-house.jpg" alt="The front of the house at 41 Hayes Road" loading="lazy"><figcaption>41 Hayes Road</figcaption></figure>
+  </div>
+</section>
+<section class="hayes-gallery" aria-label="Photos">
+  <div class="wrap gal">
+    <figure><img src="images/hayes-lake-path.jpg" alt="A wooded path at the Hayes House" loading="lazy"><figcaption>The path through the trees</figcaption></figure>
+    <figure><img src="images/hayes-lake-shoreline-mountains.jpg" alt="Schroon Lake and the mountains nearby" loading="lazy"><figcaption>Schroon Lake and the mountains nearby</figcaption></figure>
+  </div>
+</section>
+<section class="hayes-avail" id="availability">
+  <div class="wrap avail-box">
+    <p class="eyebrow">Availability</p>
+    <h2>Bookings not open yet. Dates are currently blocked.</h2>
+    <p class="vrbo">Coming soon to VRBO.</p>
+    <p>Want first word when dates open? Call or send a message and we will let you know.</p>
+    <div class="btns"><a class="btn gold" href="tel:+15188329174">Get notified when dates open: call 518-832-9174</a><a class="btn ghost" href="index.html#contact">Send a message</a></div>
+  </div>
+</section>
+""" + foot
+    assert "\u2014" not in page and "\u2013" not in page
+    for bad in ("lakefront", "dock", "lake access", "boat", "state farm", "short-term", "short term", "license.html"):
+        assert bad not in page.lower(), bad
+    (out / "hayes.html").write_text(page)
+    print("wrote", out / "hayes.html")
