@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the navy MJN Realty homepage. Usage: build.py preview|live OUTDIR"""
+"""Build the navy broker homepage (preview: Matthew J. Nothdurft, no business name). Usage: build.py preview|live OUTDIR"""
 import sys, pathlib
 mode, out = sys.argv[1], pathlib.Path(sys.argv[2])
 assert mode in ("preview", "live")
@@ -9,6 +9,11 @@ TITLE = "MJN Realty | Adirondack Real Estate and Property Management"
 FH = "https://dos.ny.gov/fair-housing-notice"
 DHR = "https://dhr.ny.gov/final-regulations-regarding-notice-tenants-rights-reasonable-accommodation"
 LIVE = "https://mjnrealty.com/"
+BROKER = "Matthew J. Nothdurft, Licensed Real Estate Broker"
+if P:
+    # Preview is Matthew's personal broker site: no business name anywhere.
+    TITLE = f"{BROKER} | Adirondack Real Estate and Property Management"
+    DESC = f"{BROKER}. Real estate, seasonal rentals, and property management in the Adirondack region of New York."
 
 head_extra = ('<meta name="robots" content="noindex,nofollow">\n' if P else f'''<link rel="canonical" href="{LIVE}">
 <meta property="og:type" content="website">
@@ -168,18 +173,23 @@ if P:
     def _rep(s, old, new):
         assert s.count(old) == 1, old
         return s.replace(old, new)
-    BIO_OLD = '<p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft leads MJN Realty with a deep love for the region he calls home.</p>'
-    BIO_NEW = ('<p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft leads MJN Realty with a deep love for the region he calls home. '
-               'Before real estate, he spent 17 years as a property and auto claims adjuster, handling homeowner and auto claims, including large loss and total loss contents claims. '
-               'That work taught him the construction process, and the devastating loss people face after a flood or fire. '
-               'He brings that same empathy to every client, and a knack for connecting people with the right help to get back on their feet after the unexpected.</p>')
-    html = _rep(html, BIO_OLD, BIO_NEW)
+    ABOUT_OLD = html[html.index('<p class="eyebrow">About MJN Realty</p>'):html.index('</div>', html.index('<div class="about-text">'))]
+    ABOUT_NEW = ('<p class="eyebrow">About Matthew</p><h2>Local roots, hands-on care.</h2>\n'
+                 '      <p>Born in the Adirondacks and raised on its lakes and trails, Matthew Nothdurft is a licensed real estate broker with a deep love for the region he calls home. '
+                 'He covers the Lake George and Schroon Lake regions of New York.</p>\n'
+                 '      <p>What sets him apart is a hands-on, personal approach. From routine check-ins to coordinating repairs with the right contractors and vendors, he treats every property like his own.</p>\n'
+                 '      <p>Beyond the work itself, Matthew is a local resource for the area. PADI scuba certified and an e-bike enthusiast, he knows the Adirondacks inside and out and is glad to point you toward the best of what the region has to offer.</p>\n    ')
+    html = _rep(html, ABOUT_OLD, ABOUT_NEW)
+    html = _rep(html, 'Call MJN Realty directly.', 'Call Matthew Nothdurft directly.')
+    html = _rep(html, '&copy; <span data-year>2026</span> MJN Realty. All rights reserved.', f'&copy; <span data-year>2026</span> {BROKER}. All rights reserved.')
     html = _rep(html, '<a href="#properties">Properties</a>', '<a href="#properties">Properties</a><a href="hayes.html">41 Hayes</a>')
     html = _rep(html, '<div class="tag">Family-owned property</div>', '<div class="tag">Showcase property</div>')
     html = _rep(html, '<p class="desc">Family-owned property.</p>', '<p class="desc">A family home, cared for like one. Seasonal rental coming soon.</p>')
     html = _rep(html, '<a class="more" href="https://41hayes.com" target="_blank" rel="noopener">Visit 41hayes.com &rarr;</a>',
                 '<a class="more" href="hayes.html">See 41 Hayes Road &rarr;</a>')
 assert "\u2014" not in html and "\u2013" not in html
+if P:
+    assert "mjn real" not in html.lower()
 for bad in ("lakefront", "dock", "lake access", "boating", "boater"):
     assert bad not in html.lower(), bad
 (out / "index.html").write_text(html)
@@ -298,7 +308,7 @@ if P:
 <section class="broker" id="brokerage">
   <div class="wrap pkg-wrap">
     <p class="eyebrow">Real estate brokerage</p>
-    <!-- LEGAL REVIEW: MJN Realty name not filed with DOS -->
+    <!-- LEGAL REVIEW: no assumed business name filed with DOS; broker name only -->
     <h2>Listing with Matthew J. Nothdurft, Licensed Real Estate Broker</h2>
     <div class="broker-box">
       <p class="broker-fee"><span>Broker commission</span><b>Negotiable</b></p>
@@ -330,7 +340,7 @@ if P:
     a = html.index("<header class=\"hero\">"); b = html.index("<main id=\"main\">")
     top = html[:a].replace(f"<title>{TITLE}</title>", f"<title>{HT}</title>")
     top = top.replace(f'content="{DESC}"', f'content="{HD}"')
-    og = (f'<meta property="og:type" content="website">\n<meta property="og:site_name" content="MJN Realty">\n'
+    og = (f'<meta property="og:type" content="website">\n<meta property="og:site_name" content="{BROKER}">\n'
           f'<meta property="og:title" content="{HT}">\n<meta property="og:description" content="{HD}">\n'
           f'<meta property="og:url" content="{PV}hayes.html">\n<meta property="og:image" content="{PV}images/hayes-front-of-house.jpg">\n'
           f'<meta property="og:image:alt" content="The front of the house at 41 Hayes Road, Schroon Lake, New York">\n'
