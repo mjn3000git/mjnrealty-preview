@@ -199,3 +199,4 @@ footer .copy{margin-top:10px;color:rgba(246,244,238,.6);font-size:13px}
 .vrbo{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px!important;padding:8px 14px}
 @media (max-width:860px){.hayes-copy{padding:60px 36px 70px}.hayes-copy h1{font-size:42px}.hayes-grid,.gal{grid-template-columns:1fr}.hayes-hero{min-height:auto}}
 @media (max-width:520px){.hayes-copy{padding-left:20px;padding-right:20px}.hayes-copy h1{font-size:34px}}
+@media (max-width:1300px){.nav-toggle{display:block}.site-nav{display:none;position:absolute;top:84px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:var(--navy3);padding:8px 36px 20px}.site-nav.open{display:flex}.site-nav a{padding:12px 0}.callbtn{margin:10px 0 0}}
