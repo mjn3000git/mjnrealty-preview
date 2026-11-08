@@ -24,7 +24,7 @@ head_extra = ('<meta name="robots" content="noindex,nofollow">\n' if P else f'''
 <meta property="og:image" content="{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"{BROKER}","url":"{LIVE}","description":"{DESC}","telephone":"+1-518-832-9174","image":"{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg","address":{{"@type":"PostalAddress","streetAddress":"8 Triphammer Road","addressLocality":"Queensbury","addressRegion":"NY","postalCode":"12804","addressCountry":"US"}},"founder":{{"@type":"Person","name":"Matthew J. Nothdurft","jobTitle":"Licensed Real Estate Broker"}},"areaServed":[{{"@type":"Place","name":"Lake George, NY"}},{{"@type":"Place","name":"Schroon Lake, NY"}},{{"@type":"Place","name":"Queensbury, NY"}},{{"@type":"Place","name":"Glens Falls, NY"}},{{"@type":"Place","name":"Adirondacks, NY"}}]}}
+{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"{BROKER}","url":"{LIVE}","description":"{DESC}","telephone":"+1-518-868-6689","image":"{LIVE}images/hero-schroon-lake-drone-DJI_0012.jpg","address":{{"@type":"PostalAddress","streetAddress":"8 Triphammer Road","addressLocality":"Queensbury","addressRegion":"NY","postalCode":"12804","addressCountry":"US"}},"founder":{{"@type":"Person","name":"Matthew J. Nothdurft","jobTitle":"Licensed Real Estate Broker"}},"areaServed":[{{"@type":"Place","name":"Lake George, NY"}},{{"@type":"Place","name":"Schroon Lake, NY"}},{{"@type":"Place","name":"Queensbury, NY"}},{{"@type":"Place","name":"Glens Falls, NY"}},{{"@type":"Place","name":"Adirondacks, NY"}}]}}
 </script>
 ''')
 LIC_NAV = '<a href="license.html">License</a>' if P else ''
@@ -51,7 +51,7 @@ html = f'''<!DOCTYPE html>
   <div class="site-nav-row">
     <a class="brand" href="#top" aria-label="Matthew Nothdurft, home"><span class="mono" aria-hidden="true">MJN</span><span class="brand-name">Matthew Nothdurft</span></a>
     <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false"><span class="sr">Menu</span><span class="bars"></span></button>
-    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a>{PKG_NAV}{LIC_NAV}<a class="callbtn" href="tel:+15188329174">Call 518-832-9174</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#areas">Areas</a><a href="#contact">Contact</a>{PKG_NAV}{LIC_NAV}<a class="callbtn" href="tel:+15188686689">Call 518-868-6689</a></nav>
   </div>
   <div class="wm" aria-hidden="true">MJN</div>
   <div class="hero-copy">
@@ -59,7 +59,7 @@ html = f'''<!DOCTYPE html>
     <p class="lic">Licensed Real Estate Broker</p>
     <p class="adk">Adirondack living</p>
     <div class="rule"></div>
-    <div class="btns"><a class="btn gold" href="#properties">View Properties</a><a class="btn ghost" href="tel:+15188329174">Call 518-832-9174</a></div>
+    <div class="btns"><a class="btn gold" href="#properties">View Properties</a><a class="btn ghost" href="tel:+15188686689">Call 518-868-6689</a></div>
   </div>
   <div class="photo-credit">Schroon Lake from above, drone photo by Matthew Nothdurft</div>
 </header>
@@ -129,7 +129,7 @@ html = f'''<!DOCTYPE html>
   <div class="wrap"><p class="eyebrow">Contact</p><h2>Let's talk</h2><div class="contact-grid">
   <div class="contact-info">
     <p class="contact-lead">Questions about buying, selling, renting, or caring for an Adirondack home? Call Matthew Nothdurft directly.</p>
-    <p class="contact-phone"><span>Office</span><a href="tel:+15188329174">518-832-9174</a></p>
+    <p class="contact-phone"><span>Office</span><a href="tel:+15188686689">518-868-6689</a></p>
     <p class="contact-region"><span>Based in</span>The Adirondack region of New York</p>
   </div>
   <!-- Contact form: Formspree free plan. Set FORMSPREE_ID in js/main.js to turn it on. While it is empty the form stays hidden and disabled. -->
@@ -153,7 +153,7 @@ html = f'''<!DOCTYPE html>
     <span class="mono" aria-hidden="true">MJN</span>
     <div>
       <p class="lic-name">Matthew J. Nothdurft, Licensed Real Estate Broker</p>
-      <p>8 Triphammer Road, Queensbury, NY 12804 | Office: <a href="tel:+15188329174">518-832-9174</a></p>
+      <p>8 Triphammer Road, Queensbury, NY 12804 | Office: <a href="tel:+15188686689">518-868-6689</a></p>
       <p>Licensed by the New York State Department of State, Division of Licensing Services.</p>
       <p>NYS Housing and Anti-Discrimination Notice (Fair Housing Notice): <a href="{FH}" target="_blank" rel="noopener">{FH}</a></p>
       <p>Tenants' Rights to Reasonable Accommodations for Persons with Disabilities (NYS Division of Human Rights notice): <a href="{DHR}" target="_blank" rel="noopener">dhr.ny.gov</a></p>
@@ -316,7 +316,7 @@ if P:
         <li>Buying a package does not require you to list with Matthew J. Nothdurft, Licensed Real Estate Broker.</li>
       </ul>
       <p class="disclose"><strong>Disclosure:</strong> Matthew Nothdurft owns Adirondack Craftworks and profits from the services it sells.</p>
-      <p class="broker-cta"><a class="btn gold" href="tel:+15188329174">Call 518-832-9174</a></p>
+      <p class="broker-cta"><a class="btn gold" href="tel:+15188686689">Call 518-868-6689</a></p>
     </div>
   </div>
 </section>
@@ -390,7 +390,7 @@ if P:
     <h2>Bookings not open yet. Dates are currently blocked.</h2>
     <p class="vrbo">Coming soon to VRBO.</p>
     <p>Want first word when dates open? Call or send a message and we will let you know.</p>
-    <div class="btns"><a class="btn gold" href="tel:+15188329174">Get notified when dates open: call 518-832-9174</a><a class="btn ghost" href="index.html#contact">Send a message</a></div>
+    <div class="btns"><a class="btn gold" href="tel:+15188686689">Get notified when dates open: call 518-868-6689</a><a class="btn ghost" href="index.html#contact">Send a message</a></div>
   </div>
 </section>
 """ + foot
